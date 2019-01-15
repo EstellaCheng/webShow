@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>概念识别</title>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/home.css" rel="stylesheet">
+    <style>
+        ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #111;
+}
+    </style>
+    <script src="/static/js/jquery.min.js"></script>
+    <script type="text/javascript">
+         function getExample(){
+             var room = "111";
+            $.ajax({
+            csrfmiddlewaretoken: '{{ csrf_token }}',
+            url:"/getconcept",
+            type:"POST",
+            data:{"roo":room},
+            success:function (data) {
+                alert(type(data));
+                alert(data[9]);
+
+              var exam=JSON.parse(data);
+              document.getElementById("roomNum").innerHTML=exam;
+            }
+            })
+        }
+         function sendTakeout(){
+            var roomNum = $('#roomNum').val() ;
+            $.ajax({
+            csrfmiddlewaretoken: '{{ csrf_token }}',
+            url:"/sendconcept",
+            type:"POST",
+            data:{"room_num":roomNum},
+            success:function (data) {
+
+               var content=JSON.parse(data);
+                document.getElementById("result").innerHTML=content;
+            }
+            })
+        }
+    </script>
+</head>
+<body>
+<ul>
+  <li><a href="/entity">实体识别</a></li>
+  <li><a href="/first">关系抽取</a></li>
+  <li><a class="active" href="#">概念发现</a></li>
+</ul>
+   <div class="main" >
+
+           <div align="center" style="margin-top:10%">
+               <!--<button class="btn btn-success text-align" onclick="startMap()">开始扫描</button>-->
+               <button class="btn" onclick="getExample()" style="margin-left:-30%">生成样例数据</button>
+               <br><br>
+               <textarea rows="5" cols="60" id="roomNum">
+               </textarea>
+               <br><br>
+               <button class="btn" onclick="sendTakeout()" style="margin-left:19%">概念识别</button>
+               <button class="btn" onclick="sendTakeout()" >概念层次识别</button>
+               <button class="btn" onclick="sendTakeout()" >公理发现</button>
+
+               <br><br>
+               <h5>概念识别结果</h5>
+               <textarea rows="5" cols="60" id="result">
+
+               </textarea>
+           </div>
+   </div>
+
+</body>
+</html>
