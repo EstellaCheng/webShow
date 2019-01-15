@@ -34,14 +34,14 @@ li a:hover {
     <script src="/static/js/jquery.min.js"></script>
     <script type="text/javascript">
          function getExample(){
-             var room = "111";
+             var room = "1112";
             $.ajax({
             csrfmiddlewaretoken: '{{ csrf_token }}',
             url:"/getconcept",
             type:"POST",
             data:{"roo":room},
             success:function (data) {
-                alert(type(data));
+                //alert(type(data));
                 alert(data[9]);
 
               var exam=JSON.parse(data);
@@ -49,17 +49,45 @@ li a:hover {
             }
             })
         }
-         function sendTakeout(){
+         function sendOne(){
             var roomNum = $('#roomNum').val() ;
             $.ajax({
             csrfmiddlewaretoken: '{{ csrf_token }}',
-            url:"/sendconcept",
+            url:"/sendconcept1",
             type:"POST",
             data:{"room_num":roomNum},
             success:function (data) {
 
-               var content=JSON.parse(data);
-                document.getElementById("result").innerHTML=content;
+               var content1=JSON.parse(data);
+                document.getElementById("result").innerHTML=content1;
+            }
+            })
+        }
+        function sendTwo(){
+            var roomNum = $('#roomNum').val() ;
+            $.ajax({
+            csrfmiddlewaretoken: '{{ csrf_token }}',
+            url:"/sendconcept2",
+            type:"POST",
+            data:{"room_num":roomNum},
+            success:function (data) {
+
+               var content2=JSON.parse(data);
+                document.getElementById("result").innerHTML=content2;
+            }
+            })
+        }
+        function sendThree(){
+            var roomNum = $('#roomNum').val() ;
+            $.ajax({
+            csrfmiddlewaretoken: '{{ csrf_token }}',
+            url:"/sendconcept3",
+            type:"POST",
+            data:{"room_num":roomNum},
+            success:function (data) {
+
+               var content3=JSON.parse(data);
+                document.getElementById("result").innerHTML=content3;
             }
             })
         }
@@ -80,9 +108,9 @@ li a:hover {
                <textarea rows="5" cols="60" id="roomNum">
                </textarea>
                <br><br>
-               <button class="btn" onclick="sendTakeout()" style="margin-left:19%">概念识别</button>
-               <button class="btn" onclick="sendTakeout()" >概念层次识别</button>
-               <button class="btn" onclick="sendTakeout()" >公理发现</button>
+               <button class="btn" onclick="sendOne()" style="margin-left:19%">概念识别</button>
+               <button class="btn" onclick="sendTwo()" >概念层次识别</button>
+               <button class="btn" onclick="sendThree()" >公理发现</button>
 
                <br><br>
                <h5>概念识别结果</h5>

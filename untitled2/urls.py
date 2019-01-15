@@ -28,6 +28,8 @@ urlpatterns = [
     path('sendchou', views.sendchou, name="sendchou"),
     path('concept', views.concept, name="concept"),
     path('getconcept', views.getconcept, name="getconcept"),
-    path('sendconcept', views.sendconcept, name="sendconcept")
+    path('sendconcept1', views.sendconcept1, name="sendconcept1"),
+    path('sendconcept2', views.sendconcept2, name="sendconcept2"),
+    path('sendconcept3', views.sendconcept3, name="sendconcept3")
 ]
 

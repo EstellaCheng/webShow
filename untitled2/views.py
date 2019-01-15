@@ -48,6 +48,7 @@ def sendchou(request):
     return HttpResponse(result)
 
 
+
 def concept(request):
     return render(request, "judge/concept.html")
 
@@ -62,7 +63,24 @@ def getconcept(request):
     return HttpResponse(ex)
 
 @csrf_exempt
-def sendconcept(request):
+def sendconcept1(request):
+    room_num=request.POST['room_num']
+    print(type(room_num))
+
+    result=json.dumps(room_num)
+    return HttpResponse(result)
+
+@csrf_exempt
+def sendconcept2(request):
+    room_num=request.POST['room_num']
+    print(type(room_num))
+
+    result=json.dumps(room_num)
+    return HttpResponse(result)
+
+
+@csrf_exempt
+def sendconcept3(request):
     room_num=request.POST['room_num']
     print(type(room_num))
 
